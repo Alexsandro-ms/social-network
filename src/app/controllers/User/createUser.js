@@ -13,10 +13,10 @@ const createUser = (req, res) => {
       where: {
         email
       }
-    }).then(() => {
+    }).then((user) => {
       const salt = bcryt.genSaltSync(10);
       const hash = bcryt.hashSync(password, salt);
-      if (email == undefined) {
+      if (user == undefined) {
         UserModel.create({
           name,
           lastName,
