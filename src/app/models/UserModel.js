@@ -1,20 +1,21 @@
-const { Sequelize } = require("sequelize");
+const Sequelize = require("sequelize");
+const connetion = require("../utils/databaseConnetion");
 
-const UserModel = new Sequelize.define("Users", {
+const UserModel = connetion.define("Users", {
   name: {
-    type: String,
+    type: Sequelize.STRING,
     allowNull: false
   },
   lastName: {
-    type: String,
+    type: Sequelize.STRING,
     allowNull: false
   },
   email: {
-    type: String,
+    type: Sequelize.STRING,
     allowNull: false
   },
   password: {
-    type: String,
+    type: Sequelize.STRING,
     allowNull: false
   }
 });
