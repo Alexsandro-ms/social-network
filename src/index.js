@@ -1,9 +1,8 @@
 const express = require("express");
 require("dotenv").config();
-
 const router = require("./app/routes");
-
 const connetion = require("./app/utils/databaseConnetion");
+const cors = require("cors");
 
 /* Iniciando a conexão com o banco de dados. */
 connetion
@@ -15,6 +14,7 @@ connetion
     /* Definindo a porta como 8080 se a variável de ambiente PORT não estiver definida. */
     const PORT = process.env.PORT || 8080;
 
+    app.use(cors());
     app.use(express.json());
 
     /* Definindo as rotas do site. */
