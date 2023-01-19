@@ -5,9 +5,11 @@ const router = express.Router();
 /* Controllers */
 const createUser = require("../controllers/User/createUser");
 const getUserById = require("../controllers/User/getUserById");
+const signInUser = require("../controllers/User/signinUser");
 
 /* Rotas de Usuários */
 router.post("/api/user", createUser);
+router.post("/api/user/signIn", signInUser);
 router.get("/api/user/:id", getUserById);
 
 module.exports = router;
