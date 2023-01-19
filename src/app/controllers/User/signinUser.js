@@ -1,5 +1,6 @@
 const UserModel = require("../../models/UserModel");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 const signInUser = (req, res) => {
   /* Recebendo email e senha do corpo da requisição. */
@@ -23,9 +24,30 @@ const signInUser = (req, res) => {
 
           /* Verificando se a senha enviada no corpo da requisição, e a cadastrada no banco de dados são a mesma. */
           if (validationPassword) {
-            return res
-              .status(200)
-              .json({ message: "User successfully logged in!" });
+            /* Obtendo o JWTKEY ​​do arquivo .env. */
+            const jwtKey = process.env.JWTKEY;
+            /* Criando um token com o nome e email do usuário. */
+            jwt.sign(
+              { name: user.name, email: user.email },
+              jwtKey,
+              {
+                expiresIn: "30s"
+              },
+              (err, token) => {
+                /*
+                 * Verificando se há um erro no token.
+                 * Se houver um erro retornara uma mensagem com o erro.
+                 * Caso não tenha, retornara uma mensagem e um token.
+                 */
+                if (err) {
+                  return res.status(500).json({ message: err });
+                } else {
+                  return res
+                    .status(200)
+                    .json({ message: "User successfully logged in!", token });
+                }
+              }
+            );
           } else {
             return res.status(400).json({ message: "Incorrect password." });
           }
