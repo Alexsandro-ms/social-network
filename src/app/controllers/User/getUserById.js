@@ -4,11 +4,7 @@ const getUserById = (req, res) => {
   if (isNaN(req.params.id)) {
   } else {
     const id = req.params.id;
-    UserModel.findByPk({
-      where: {
-        id
-      }
-    })
+    UserModel.findByPk(id)
       .then((user) => {
         return res.status(200).json(user);
       })
