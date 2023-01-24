@@ -31,7 +31,7 @@ const signInUser = (req, res) => {
               { name: user.name, email: user.email },
               jwtKey,
               {
-                expiresIn: "30s"
+                expiresIn: "48h"
               },
               (err, token) => {
                 /*
