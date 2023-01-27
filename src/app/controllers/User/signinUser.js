@@ -1,68 +1,50 @@
 const UserModel = require("../../models/UserModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const jwtKey = process.env.JWTKEY;
 
-const signInUser = (req, res) => {
-  /* Recebendo email e senha do corpo da requisição. */
-  const { email, password } = req.body;
+const signInUser = async (req, res) => {
+  try {
+    /* Desestruturando o e-mail e a senha do corpo da solicitação. */
+    const { email, password } = req.body;
 
-  /* Verificando se o e-mail e a senha não estão vazios. */
-  if (email.length && password.length != 0) {
-    /* Procurando um usuário com o e-mail que foi enviado no corpo da solicitação. */
-    UserModel.findOne({
-      where: {
-        email
-      }
-    })
-      .then((user) => {
-        /* Verificando se o usuário existe. */
-        if (user != undefined) {
-          const validationPassword = bcrypt.compareSync(
-            password,
-            user.password
-          );
+    /* Validação que verifica se o usuário preencheu todos os campos. */
+    if (!email || !password) {
+      return res.status(400).json({ message: "Fill in all fields." });
+    }
 
-          /* Verificando se a senha enviada no corpo da requisição, e a cadastrada no banco de dados são a mesma. */
-          if (validationPassword) {
-            /* Obtendo o JWTKEY ​​do arquivo .env. */
-            const jwtKey = process.env.JWTKEY;
-            /* Criando um token com o nome e email do usuário. */
-            jwt.sign(
-              { name: user.name, email: user.email },
-              jwtKey,
-              {
-                expiresIn: "48h"
-              },
-              (err, token) => {
-                /*
-                 * Verificando se há um erro no token.
-                 * Se houver um erro retornara uma mensagem com o erro.
-                 * Caso não tenha, retornara uma mensagem e um token.
-                 */
-                if (err) {
-                  return res.status(500).json({ message: err });
-                } else {
-                  return res
-                    .status(200)
-                    .json({ message: "User successfully logged in!", token });
-                }
-              }
-            );
-          } else {
-            return res.status(400).json({ message: "Incorrect password." });
-          }
-        } else {
-          /* Caso o usuário não seja encontrado, retornará uma mensagem informando que o usuário não foi encontrado. */
-          return res.status(400).json({ message: "User not found." });
-        }
-      })
-      .catch((err) => {
-        /* Retornando a mensagem de erro para o usuário, caso tenha um erro interno do servidor. */
-        return res.status(500).json({ message: err });
-      });
-  } else {
-    /* Retornando uma mensagem ao usuário informando que os campos estão vazios. */
-    return res.status(400).json({ message: "Fill in all fields." });
+    /* Procurando um usuário no banco de dados com o e-mail que foi enviado no corpo da solicitação. */
+    const user = await UserModel.findOne({ where: { email } });
+
+    /* Verificando se exite um usuário no banco de dados, caso não exista, 
+    retornara status de erro, e mensagem.*/
+    if (!user) {
+      return res.status(400).json({ message: "User not found." });
+    }
+
+    /* Comparando a senha que o usuário enviou no corpo da solicitação 
+    com a senha que está armazenada no banco de dados. */
+    const isPasswordValid = bcrypt.compareSync(password, user.password);
+
+    /* Verificando se a senha é válida, se não for
+    retornará uma mensagem de erro */
+    if (!isPasswordValid) {
+      return res.status(400).json({ message: "Incorrect password." });
+    }
+
+    /* Criando um token para o usuário, com expiração de 48 horas e 
+    assinando nome e email no payload do token. */
+    const token = jwt.sign({ name: user.name, email: user.email }, jwtKey, {
+      expiresIn: "48h"
+    });
+
+    /* Retornando um status de 200 (solicitação foi bem-sucedida), uma mensagem e um token. */
+    return res
+      .status(200)
+      .json({ message: "User successfully logged in!", token });
+  } catch (err) {
+    /* Retornando um status de 500 (erro interno do servidor) e uma mensagem de err. */
+    return res.status(500).json({ message: err });
   }
 };
 
