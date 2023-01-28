@@ -13,7 +13,7 @@ const sendingEmailForgotPassword = async (req, res) => {
     }
     /* Gerar token de redefinição de senha. */
     const resetToken = jwt.sign({ email: user.email }, secret_key, {
-      expiresIn: "30s"
+      expiresIn: "15m"
     });
     /* Atualizando senha do usuário com token de redefinição */
     await UserModel.update(
@@ -22,7 +22,9 @@ const sendingEmailForgotPassword = async (req, res) => {
     );
     /* Enviando e-mail com link de redefinição de senha. */
     const htmlMessage = `
-    <p>Você solicitou uma redefinição de senha. Clique no link abaixo para redefinir sua senha:</p>
+    <h1>Você solicitou uma redefinição de senha. </h1>
+    <p>Lembre-se, você terá <strong>15 minutos</strong> para redefinir sua senha! Passar do tempo, deverá fazer uma nova solicitação.</p>
+    <p>Clique no link abaixo para redefinir sua senha:</p>
     <button><a href="http://localhost:8080/api/user/forgout-password/${resetToken}">Redefinir senha</a></button>
     `;
     /* Enviando o email de redefinição de senha. */
