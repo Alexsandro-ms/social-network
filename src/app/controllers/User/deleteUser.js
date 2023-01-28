@@ -1,19 +1,29 @@
 const UserModel = require("../../models/UserModel");
+const PostModel = require("../../models/PostModel");
 
-const deleteUser = async (req, res) => {
-  try {
-    const { userId } = req.body;
-    const user = await UserModel.findOne({ where: { id: userId } });
-
-    if (!user) {
-      return res.status(404).json({ message: "User not found." });
-    }
-
-    await user.destroy();
-    res.status(204).json({ message: "Successfully deleted user!" });
-  } catch (error) {
-    res.sendStatus(500);
-  }
+const deleteUser = (req, res) => {
+  /* Encontrando o usuário pelo id recebido via parâmetros. */
+  UserModel.findByPk(req.params.id)
+    .then((user) => {
+      if (!user) {
+        return res.status(404).send("User not found.");
+      }
+      /* Deletando usuário. */
+      return user.destroy();
+    })
+    .then(() => {
+      /* Deletando posts associado ao usuário */
+      return PostModel.destroy({
+        where: {
+          userId: req.params.id
+        }
+      });
+    })
+    .then(() => {
+      res.send("Successfully deleted user!");
+    })
+    .catch((err) => {
+      res.status(500).send(err);
+    });
 };
-
 module.exports = deleteUser;
