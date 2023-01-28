@@ -17,6 +17,9 @@ const UserModel = connetion.define("Users", {
   password: {
     type: Sequelize.STRING,
     allowNull: false
+  },
+  resetPasswordToken: {
+    type: Sequelize.STRING
   }
 });
 
