@@ -11,6 +11,7 @@ const AuthMiddleware = require("../middlewares/AuthMiddleware");
 const createPost = require("../controllers/Post/createPost");
 const getAllPostByUserId = require("../controllers/Post/getAllPostByUserId");
 const getPostDetails = require("../controllers/Post/getPostDetails");
+const deletePost = require("../controllers/Post/deletePost");
 
 /* Users */
 const createUser = require("../controllers/User/createUser");
@@ -32,5 +33,6 @@ router.patch("/api/user/forgout-password/:token", changePasswordUser);
 router.post("/api/post", AuthMiddleware, createPost);
 router.get("/api/posts/:id", AuthMiddleware, getAllPostByUserId);
 router.get("/api/post/:postId", AuthMiddleware, getPostDetails);
+router.delete("/api/post", AuthMiddleware, deletePost);
 
 module.exports = router;
