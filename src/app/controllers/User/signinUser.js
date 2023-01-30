@@ -34,9 +34,13 @@ const signInUser = async (req, res) => {
 
     /* Criando um token para o usuário, com expiração de 48 horas e 
     assinando nome e email no payload do token. */
-    const token = jwt.sign({ name: user.name, email: user.email }, jwtKey, {
-      expiresIn: "48h"
-    });
+    const token = jwt.sign(
+      { id: user.id, name: user.name, email: user.email },
+      jwtKey,
+      {
+        expiresIn: "48h"
+      }
+    );
 
     /* Retornando um status de 200 (solicitação foi bem-sucedida), uma mensagem e um token. */
     return res

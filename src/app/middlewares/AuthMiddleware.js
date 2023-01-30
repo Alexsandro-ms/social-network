@@ -13,9 +13,9 @@ const AuthMiddleware = (req, res, next) => {
     /* Atribuindo cabeçalho de autorização à variável chamada token. */
     const token = authorization;
     /* Desestruturando as propriedades de nome e e-mail do payload carregado no token. */
-    const { name, email } = jwt.verify(token, JWTKEY);
+    const { id, name, email } = jwt.verify(token, JWTKEY);
     /* Atribuindo as variáveis ​​name e email à propriedade loggingUserInfo do objeto req. */
-    req.loggedUserInfo = { name, email };
+    req.loggedUserInfo = { id, name, email };
     /* Atribuindo token a propriedade token do objeto req, */
     req.token = token;
     return next();
