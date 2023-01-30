@@ -1,7 +1,7 @@
 const PostModel = require("../../models/PostModel");
 const UserModel = require("../../models/UserModel");
 
-const getPostByUserId = async (req, res) => {
+const getAllPostByUserId = async (req, res) => {
   try {
     /* Recebendo id via parâmetros. */
     const id = req.params.id;
@@ -17,7 +17,7 @@ const getPostByUserId = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    /* Procurando todos os posts apartit do id de usuário. */
+    /* Procurando todos os posts apartir do id de usuário. */
     const posts = await PostModel.findAll({
       where: {
         UserId: user.id
@@ -29,4 +29,4 @@ const getPostByUserId = async (req, res) => {
   }
 };
 
-module.exports = getPostByUserId;
+module.exports = getAllPostByUserId;
