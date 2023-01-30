@@ -10,6 +10,7 @@ const AuthMiddleware = require("../middlewares/AuthMiddleware");
 /* Postes */
 const createPost = require("../controllers/Post/createPost");
 const getAllPostByUserId = require("../controllers/Post/getAllPostByUserId");
+const getPostDetails = require("../controllers/Post/getPostDetails");
 
 /* Users */
 const createUser = require("../controllers/User/createUser");
@@ -29,6 +30,7 @@ router.patch("/api/user/forgout-password/:token", changePasswordUser);
 
 /* Rotas de postes */
 router.post("/api/post", AuthMiddleware, createPost);
-router.get("/api/post/:id", AuthMiddleware, getAllPostByUserId);
+router.get("/api/posts/:id", AuthMiddleware, getAllPostByUserId);
+router.get("/api/post/:postId", AuthMiddleware, getPostDetails);
 
 module.exports = router;
