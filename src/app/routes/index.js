@@ -13,6 +13,9 @@ const getAllPostByUserId = require("../controllers/Post/getAllPostByUserId");
 const getPostDetails = require("../controllers/Post/getPostDetails");
 const deletePost = require("../controllers/Post/deletePost");
 
+/* Followers */
+const followUser = require("../controllers/Followers/followUser");
+
 /* Users */
 const createUser = require("../controllers/User/createUser");
 const getUserById = require("../controllers/User/getUserById");
@@ -28,6 +31,9 @@ router.get("/api/user/:id", getUserById);
 router.delete("/api/user", AuthMiddleware, deleteUser);
 router.post("/api/user/forgout-password", sendingEmailForgotPassword);
 router.patch("/api/user/forgout-password/:token", changePasswordUser);
+
+/* Rotas de Seguidores */
+router.post("/api/follow", AuthMiddleware, followUser);
 
 /* Rotas de postes */
 router.post("/api/post", AuthMiddleware, createPost);
