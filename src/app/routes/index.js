@@ -15,6 +15,7 @@ const deletePost = require("../controllers/Post/deletePost");
 
 /* Followers */
 const followUser = require("../controllers/Followers/followUser");
+const unfollowUser = require("../controllers/Followers/unfollowUser");
 
 /* Users */
 const createUser = require("../controllers/User/createUser");
@@ -34,6 +35,7 @@ router.patch("/api/user/forgout-password/:token", changePasswordUser);
 
 /* Rotas de Seguidores */
 router.post("/api/follow", AuthMiddleware, followUser);
+router.delete("/api/follow", AuthMiddleware, unfollowUser);
 
 /* Rotas de postes */
 router.post("/api/post", AuthMiddleware, createPost);
