@@ -12,6 +12,7 @@ const createPost = require("../controllers/Post/createPost");
 const getAllPostByUserId = require("../controllers/Post/getAllPostByUserId");
 const getPostDetails = require("../controllers/Post/getPostDetails");
 const deletePost = require("../controllers/Post/deletePost");
+const getAllPost = require("../controllers/Post/getAllPosts");
 
 /* Followers */
 const followUser = require("../controllers/Followers/followUser");
@@ -38,8 +39,9 @@ router.post("/api/follow", AuthMiddleware, followUser);
 router.delete("/api/follow", AuthMiddleware, unfollowUser);
 
 /* Rotas de postes */
-router.post("/api/post", AuthMiddleware, createPost);
 router.get("/api/posts/:id", AuthMiddleware, getAllPostByUserId);
+router.get("/api/posts", AuthMiddleware, getAllPost);
+router.post("/api/post", AuthMiddleware, createPost);
 router.get("/api/post/:postId", AuthMiddleware, getPostDetails);
 router.delete("/api/post", AuthMiddleware, deletePost);
 
