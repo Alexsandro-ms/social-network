@@ -12,7 +12,7 @@ const createPost = require("../controllers/Post/createPost");
 const getAllPostByUserId = require("../controllers/Post/getAllPostByUserId");
 const getPostDetails = require("../controllers/Post/getPostDetails");
 const deletePost = require("../controllers/Post/deletePost");
-const getAllPost = require("../controllers/Post/getAllPosts");
+const getAllPost = require("../controllers/Post/getAllPosts.js");
 
 /* Followers */
 const followUser = require("../controllers/Followers/followUser");
