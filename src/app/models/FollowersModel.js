@@ -1,19 +1,21 @@
+const Sequelize = require("sequelize");
 const connetion = require("../utils/databaseConnetion");
 const UserModel = require("./UserModel");
 
-const FollowerModel = connetion.define("follower", {});
-
-UserModel.belongsToMany(UserModel, {
-  through: FollowerModel,
-  as: "followers",
-  foreignKey: "followerId"
-});
-UserModel.belongsToMany(UserModel, {
-  through: FollowerModel,
-  as: "following",
-  foreignKey: "followingId"
+const FollowerModel = connetion.define("follower", {
+  userId: {
+    type: Sequelize.INTEGER,
+    allowNull: false
+  },
+  followerId: {
+    type: Sequelize.INTEGER,
+    allowNull: false
+  }
 });
 
-FollowerModel.sync({ force: true });
+UserModel.hasMany(FollowerModel, { foreignKey: "followerId", as: "followers" });
+FollowerModel.belongsTo(UserModel, { foreignKey: "userId", as: "following" });
+
+FollowerModel.sync();
 
 module.exports = FollowerModel;
