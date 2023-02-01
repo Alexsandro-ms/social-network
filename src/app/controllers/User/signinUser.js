@@ -43,9 +43,11 @@ const signInUser = async (req, res) => {
     );
 
     /* Retornando um status de 200 (solicitação foi bem-sucedida), uma mensagem e um token. */
-    return res
-      .status(200)
-      .json({ message: "User successfully logged in!", token });
+    return res.status(200).json({
+      message: "User successfully logged in!",
+      token,
+      user: [user.id, user.name, user.email]
+    });
   } catch (err) {
     /* Retornando um status de 500 (erro interno do servidor) e uma mensagem de err. */
     return res.status(500).json({ message: err });
