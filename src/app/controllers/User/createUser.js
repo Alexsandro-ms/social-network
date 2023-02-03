@@ -3,6 +3,9 @@ const bcryt = require("bcrypt");
 
 const createUser = async (req, res) => {
   try {
+    /* Verificando se o usuário fez upload de uma imagem. Se o usuário fez upload de uma imagem, 
+    ele salvará o nome da imagem na variável `imagePath`. */
+    const image = req.file?.filename;
     /* Desestruturando variáveis recebidas no corpo da solicitação. */
     const { name, lastName, email, password } = req.body;
 
@@ -26,6 +29,7 @@ const createUser = async (req, res) => {
 
     /* Criando um novo usuário no banco de dados. */
     await UserModel.create({
+      imagePath: image,
       name,
       lastName,
       email,
