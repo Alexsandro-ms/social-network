@@ -1,7 +1,7 @@
 const express = require("express");
 require("dotenv").config();
-const router = require("./app/routes");
-const connetion = require("./app/utils/databaseConnetion");
+const router = require("./routes");
+const connetion = require("./utils/databaseConnetion");
 const cors = require("cors");
 
 /* Iniciando a conexão com o banco de dados. */
@@ -16,6 +16,7 @@ connetion
 
     app.use(cors());
     app.use(express.json());
+    app.use("/uploads", express.static("uploads"));
 
     /* Definindo as rotas do site. */
     app.use(router);

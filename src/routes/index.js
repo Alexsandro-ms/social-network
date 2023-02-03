@@ -9,7 +9,7 @@ const router = express.Router();
 /* Criando uma pasta chamada uploads no diretório raiz do projeto, caso não haja uma. */
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    const uploadsDir = path.resolve(__dirname, "..", "uploads");
+    const uploadsDir = path.resolve(__dirname, "../../uploads/");
 
     if (!fs.existsSync(uploadsDir)) {
       fs.mkdirSync(uploadsDir, { recursive: true });
