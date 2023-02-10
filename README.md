@@ -20,7 +20,7 @@ API 'Social Network' permite que desenvolvedores integrem recursos de uma rede s
 - Seguir um usuário;
 - Deixar de seguir um usuário;
 - Criar post;
-- Listagem de posts de seguidores;
+- Listagem de posts (For you) com páginação;
 - Listar todos os posts de um usuário;
 - Listar informações de um único post;
 - Deletar post.
