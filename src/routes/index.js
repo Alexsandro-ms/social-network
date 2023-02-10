@@ -64,7 +64,7 @@ router.delete("/api/follow", AuthMiddleware, unfollowUser);
 /* Rotas de postes */
 router.get("/api/posts/:id", AuthMiddleware, getAllPostByUserId);
 router.get("/api/posts/:page/:limit", AuthMiddleware, getAllPost);
-router.post("/api/post", AuthMiddleware, createPost);
+router.post("/api/post", AuthMiddleware, upload, createPost);
 router.get("/api/post/:postId", AuthMiddleware, getPostDetails);
 router.delete("/api/post", AuthMiddleware, deletePost);
 

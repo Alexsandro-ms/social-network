@@ -11,8 +11,10 @@ const createPost = async (req, res) => {
       return res.status(400).json({ message: "Fill in all fields" });
     }
 
+    const image = req.file?.filename;
+
     /* Criando novo post. */
-    await PostModel.create({ body, UserId: userId });
+    await PostModel.create({ imagePath: image, body, UserId: userId });
 
     return res.status(201).json({ message: "Post created!" });
   } catch (err) {
