@@ -6,6 +6,10 @@ const PostModel = connetion.define("posts", {
   body: {
     type: Sequelize.TEXT,
     allowNull: false
+  },
+  imagePath: {
+    type: Sequelize.STRING,
+    allowNull: true
   }
 });
 
