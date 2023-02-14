@@ -1,7 +1,7 @@
 const Sequelize = require("sequelize");
 const connetion = require("../utils/databaseConnetion");
 
-const UserModel = connetion.define("Users", {
+const UserModel = connetion.define("users", {
   imagePath: {
     type: Sequelize.STRING,
     allowNull: true

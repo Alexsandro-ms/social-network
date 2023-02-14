@@ -2,7 +2,7 @@ const Sequelize = require("sequelize");
 const connetion = require("../utils/databaseConnetion");
 const UserModel = require("./UserModel");
 
-const FollowerModel = connetion.define("follower", {
+const FollowerModel = connetion.define("followers", {
   userId: {
     type: Sequelize.INTEGER,
     allowNull: false
