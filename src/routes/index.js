@@ -29,6 +29,9 @@ const upload = multer({ storage }).single("image");
 const AuthMiddleware = require("../middlewares/AuthMiddleware");
 
 /* Controllers */
+/* Comments */
+const createComment = require("../controllers/Comments/CreateComment");
+
 /* Postes */
 const createPost = require("../controllers/Post/createPost");
 const getAllPostByUserId = require("../controllers/Post/getAllPostByUserId");
@@ -61,11 +64,14 @@ router.patch("/api/user/forgout-password/:token", changePasswordUser);
 router.post("/api/follow", AuthMiddleware, followUser);
 router.delete("/api/follow", AuthMiddleware, unfollowUser);
 
-/* Rotas de postes */
+/* Rotas de Postes */
 router.get("/api/posts/:id", AuthMiddleware, getAllPostByUserId);
 router.get("/api/posts/:page/:limit", AuthMiddleware, getAllPost);
 router.post("/api/post", AuthMiddleware, upload, createPost);
 router.get("/api/post/:postId", AuthMiddleware, getPostDetails);
 router.delete("/api/post", AuthMiddleware, deletePost);
+
+/* Rotas de Comentarios */
+router.post("/api/comment", AuthMiddleware, createComment);
 
 module.exports = router;
