@@ -3,9 +3,7 @@ const FollowersModel = require("../../models/FollowersModel");
 
 const getAllPost = async (req, res) => {
   try {
-    // Obtém o ID do usuário logado
-    const { id: userId } = req.loggedUserInfo;
-
+    const userId = req.loggedUserInfo.id; // Obtém o ID do usuário logado
     // Busca todos os usuários seguidos pelo usuário logado
     const followers = await FollowersModel.findAll({
       where: { followerId: userId },
@@ -13,17 +11,18 @@ const getAllPost = async (req, res) => {
       raw: true
     });
 
-    // Adiciona o ID do usuário logado à lista de usuários seguidos
-    followers.push({ userId });
+    followers.push({ userId }); // Adiciona o ID do usuário logado à lista de usuários seguidos
 
-    // Definindo valores padrão para a página e limite
+    /* Obtendo o userId do array de seguidores. */
+    const followerIds = followers.map((follower) => follower.userId);
 
+    /* Definindo limites e página. */
     const page = parseInt(req.params.page) || 1;
     const limit = parseInt(req.params.limit) || 10;
 
-    // Utiliza o método findAndCountAll do sequelize para buscar posts e retornar o total de resultados
+    /* Desetruturando posts dos seguidores e quantidade */
     const { rows: followingPosts, count } = await PostModel.findAndCountAll({
-      where: { userId: followers.map((response) => response.userId) },
+      where: { userId: followerIds },
       order: [["createdAt", "DESC"]],
       limit,
       offset: (page - 1) * limit
@@ -31,12 +30,11 @@ const getAllPost = async (req, res) => {
 
     // Adiciona o total de resultados à resposta HTTP
     res.set("X-Total-Count", count);
-
-    // Envia a resposta HTTP com todos os posts
+    /* Enviando a resposta HTTP com os posts. */
     return res.send(followingPosts);
-  } catch (err) {
-    // Em caso de erro, envia um status de erro HTTP 500
-    return res.sendStatus(500);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send("Internal server error");
   }
 };
 
