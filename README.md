@@ -1,6 +1,7 @@
 # Social Network - Api
 
-API 'Social Network' permite que desenvolvedores integrem recursos de uma rede social em seus aplicativos. Ela inclui funcionalidades como autenticação de usuários, publicação de postagens e gerenciamento de seguidores. A API também pode fornecer informações de perfil de usuário, como nome e sobrenome. É possível acessar esses recursos usando requisições HTTP e receber respostas em formato JSON.
+API 'Social Network' permite que desenvolvedores integrem recursos de uma rede social em seus aplicativos. Ela inclui funcionalidades como autenticação de usuários, publicação de postagens, exibição de postes e gerenciamento de seguidores. A API também pode fornecer informações de perfil de usuário, como nome e sobrenome. É possível acessar esses recursos usando requisições HTTP e receber respostas em formato JSON.
+**Lista completa de todas as funcionalidades abaixo.**
 
 #### 🚧 API em contrução 🚧
 
