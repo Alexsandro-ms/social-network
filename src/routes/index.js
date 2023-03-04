@@ -48,6 +48,7 @@ const createUser = require("../controllers/User/createUser");
 const getUserById = require("../controllers/User/getUserById");
 const signInUser = require("../controllers/User/signinUser");
 const deleteUser = require("../controllers/User/deleteUser");
+const searchUser = require("../controllers/User/searchUser");
 
 const changePasswordUser = require("../controllers/User/changePasswordUser");
 const sendingEmailForgotPassword = require("../controllers/User/sendingEmailForgotPassword");
@@ -55,6 +56,7 @@ const sendingEmailForgotPassword = require("../controllers/User/sendingEmailForg
 /* Rotas de Usuários */
 router.post("/api/user", upload, createUser);
 router.post("/api/user/signIn", signInUser);
+router.get("/api/user/search/:name", searchUser);
 router.get("/api/user/:id", getUserById);
 router.delete("/api/user", AuthMiddleware, deleteUser);
 router.post("/api/user/forgout-password", sendingEmailForgotPassword);
