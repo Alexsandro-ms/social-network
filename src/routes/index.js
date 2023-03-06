@@ -29,6 +29,10 @@ const upload = multer({ storage }).single("image");
 const AuthMiddleware = require("../middlewares/AuthMiddleware");
 
 /* Controllers */
+
+/* Likes */
+const LikeThis = require("../controllers/Likes/LikeThis");
+
 /* Comments */
 const createComment = require("../controllers/Comments/CreateComment");
 
@@ -75,5 +79,8 @@ router.delete("/api/post", AuthMiddleware, deletePost);
 
 /* Rotas de Comentarios */
 router.post("/api/comment", AuthMiddleware, createComment);
+
+/* Rotas de Likes */
+router.post("/api/like", AuthMiddleware, LikeThis);
 
 module.exports = router;

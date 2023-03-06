@@ -14,11 +14,13 @@ const PostModel = connetion.define("posts", {
   imagePath: {
     type: Sequelize.STRING,
     allowNull: true
+  },
+  likes: {
+    type: Sequelize.INTEGER,
+    defaultValue: 0
   }
 });
 
 UserModel.hasMany(PostModel);
-
 PostModel.sync();
-
 module.exports = PostModel;
