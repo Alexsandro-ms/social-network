@@ -53,9 +53,12 @@ Para rodar esse projeto, você vai precisar adicionar as seguintes variáveis de
 
 `MYSQLUSER` `MYSQLPASSWORD` `MYSQLDATABASE`
 
-## Endpoints
+## Api
+
+#### **Endpoints**
 
 <details>
+
  <summary>Usuários</summary>
 
 #### **observação.: em todos os endpoints será necessário enviar um header de Authorization com um token válido, exceto nos endpoints de login e cadastro de usuário.**
@@ -232,6 +235,238 @@ Se a senha for alterada, a resposta será um status code 200 e um JSON com a seg
 ```json
 {
   "message": "Password updated successfully"
+}
+```
+
+</details>
+
+<details>
+  <summary>Seguir</summary>
+
+#### **Seguir usuário**
+
+```
+  `POST /api/follow`
+```
+
+Os seguintes parâmetros devem ser passados no corpo da requisição:
+
+| Parâmetros | corpo | Tipo        |
+| ---------- | ----- | ----------- |
+| followerId | id    | obrigatório |
+
+Se um usuário seguir outro, a resposta será um status code 200 e um JSON com a seguinte estrutura:
+
+```json
+{
+	"message": message: "Successfully followed user."
+}
+```
+
+#### **Deixar de seguir usuário**
+
+```
+  `DELETE /api/follow`
+```
+
+Os seguintes parâmetros devem ser passados no corpo da requisição:
+
+| Parâmetros | corpo | Tipo        |
+| ---------- | ----- | ----------- |
+| followerId | id    | obrigatório |
+
+Se um usuário deixar de seguir outro, a resposta será um status code 200 e um JSON com a seguinte estrutura:
+
+```json
+{
+	"message": message: "Successfully unfollowed."
+}
+```
+
+</details>
+
+<details>
+
+    <summary>Postagens</summary>
+
+#### **Criar postagem**
+
+```
+  `POST /api/posts`
+```
+
+Os seguintes parâmetros devem ser passados no corpo da requisição:
+
+| Parâmetros | corpo    | Tipo        |
+| ---------- | -------- | ----------- |
+| body       | conteúdo | obrigatório |
+| image      | file     | opcional    |
+
+A resposta será um status code 201 e um JSON com a seguinte estrutura:
+
+```json
+{
+	{
+	"message": "Post created!"
+	}
+}
+
+```
+
+#### **For you**
+
+```
+  `GET /api/posts/:page/:limit`
+```
+
+Os seguintes parâmetros devem ser passados no parâmetro da requisição:
+
+| Parâmetros | Parâmetro  | Tipo        |
+| ---------- | ---------- | ----------- |
+| page       | **number** | obrigatório |
+| limit      | **number** | opcional    |
+
+A resposta será um status code 200 e um JSON com a seguinte estrutura:
+
+```json
+{
+[
+	{
+		"id": 1,
+		"userName": "user",
+		"body": "Lorem ipsum dolor sit",
+		"imagePath": null,
+		"likes": 0,
+		"createdAt": "2023-03-13T18:57:57.000Z",
+		"updatedAt": "2023-03-13T18:57:57.000Z",
+		"userId": 1
+	},
+	{
+		"id": 2,
+		"userName": "user",
+		"body": "Lorem ipsum dolor sit",
+		"imagePath": null,
+		"likes": 0,
+		"createdAt": "2023-03-13T18:57:57.000Z",
+		"updatedAt": "2023-03-13T18:57:57.000Z",
+		"userId": 2
+	}
+]
+}
+
+```
+
+#### **Exibir detalhes de uma postagem**
+
+```
+  `GET /api/posts/:id`
+```
+
+Os seguintes parâmetros devem ser passados no corpo da requisição:
+
+| Parâmetros | corpo      | Tipo        |
+| ---------- | ---------- | ----------- |
+| id         | **number** | obrigatório |
+
+A resposta será um status code 200 e um JSON com a seguinte estrutura:
+
+```json
+{
+  "id": 1,
+  "userName": "user",
+  "body": "Lorem ipsum dolor sit",
+  "imagePath": null,
+  "likes": 0,
+  "createdAt": "2023-03-13T18:57:57.000Z",
+  "updatedAt": "2023-03-13T18:57:57.000Z",
+  "userId": 1
+}
+```
+
+#### **Exibir todas as postagens de um usuário**
+
+```
+  `GET /api/posts/:id`
+```
+
+Os seguintes parâmetros devem ser passados no parâmetro da requisição:
+
+| Parâmetros | corpo | Tipo        |
+| ---------- | ----- | ----------- |
+| id         | 1     | obrigatório |
+
+A resposta será um status code 200 e um JSON com a seguinte estrutura:
+
+```json
+{
+[
+	{
+		"id": 1,
+		"userName": "user",
+		"body": "Lorem ipsum dolor sit",
+		"imagePath": null,
+		"likes": 0,
+		"createdAt": "2023-03-13T18:57:57.000Z",
+		"updatedAt": "2023-03-13T18:57:57.000Z",
+		"userId": 1
+	},
+	{
+		"id": 2,
+		"userName": "user",
+		"body": "Lorem ipsum dolor sit",
+		"imagePath": null,
+		"likes": 0,
+		"createdAt": "2023-03-13T18:57:57.000Z",
+		"updatedAt": "2023-03-13T18:57:57.000Z",
+		"userId": 1
+	}
+]
+}
+```
+
+#### **Deletar postagem**
+
+```
+  `DELETE /api/posts/:postId`
+```
+
+Os seguintes parâmetros devem ser passados no parâmetro da requisição:
+
+| Parâmetros | corpo      | Tipo        |
+| ---------- | ---------- | ----------- |
+| postId     | **number** | obrigatório |
+
+A resposta será um status code 200 e um JSON com a seguinte estrutura:
+
+```json
+{
+  "message": "Post deleted successfully."
+}
+```
+
+</details>
+
+<details>
+
+<summary>Curtir</summary>
+
+#### **Curtir postagem**
+
+```
+  `POST /api/like`
+```
+
+Os seguintes parâmetros devem ser passados no corpo da requisição:
+
+| Parâmetros | corpo      | Tipo        |
+| ---------- | ---------- | ----------- |
+| postId     | **number** | obrigatório |
+
+A resposta será um status code 200 e um JSON com a seguinte estrutura:
+
+```json
+{
+  "likes": 0
 }
 ```
 

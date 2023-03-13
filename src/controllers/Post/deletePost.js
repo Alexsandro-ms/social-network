@@ -8,22 +8,22 @@ const deletePost = async (req, res) => {
   try {
     const user = await UserModel.findByPk(userId);
     if (!user) {
-      return res.status(404).json({ message: "Usuário não encontrado." });
+      return res.status(404).json({ message: "User not found." });
     }
 
     const post = await PostModel.findByPk(postId);
     if (!post) {
-      return res.status(404).json({ message: "Post não encontrado." });
+      return res.status(404).json({ message: "Post not found." });
     }
 
     if (post.userId !== userId) {
-      return res.status(401).json({ message: "Ação não autorizada." });
+      return res.status(401).json({ message: "Not authorized." });
     }
 
     await post.destroy();
-    return res.json({ message: "Post excluído com sucesso." });
+    return res.json({ message: "Post deleted successfully." });
   } catch (error) {
-    return res.status(500).json({ message: "Erro interno do servidor." });
+    return res.status(500).json({ message: "Internal server error." });
   }
 };
 
