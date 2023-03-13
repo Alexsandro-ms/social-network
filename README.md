@@ -62,7 +62,6 @@ Para rodar esse projeto, você vai precisar adicionar as seguintes variáveis de
 #### **O token será gerado à partir do login de usuário**
 
 <details>
-
  <summary>Usuários</summary>
 
 #### **Login de usuário**
@@ -237,11 +236,11 @@ Se a senha for alterada, a resposta será um status code 200 e um JSON com a seg
   "message": "Password updated successfully"
 }
 ```
-
 </details>
 
 <details>
-  <summary>Seguir</summary>
+	
+<summary>Seguir</summary>
 
 #### **Seguir usuário**
 
@@ -286,8 +285,7 @@ Se um usuário deixar de seguir outro, a resposta será um status code 200 e um 
 </details>
 
 <details>
-
-    <summary>Postagens</summary>
+<summary>Postagens</summary>
 
 #### **Criar postagem**
 
