@@ -50,13 +50,17 @@ Instale as dependências de social-network com npm ou yarn
 
 Crie um novo Schema do mysql, necessário para a prosseguir com o funcionamento da aplicação
 
+## Criação de uma conta no MAILTRAP
+
+Para usar a funcionalidade de envio de email, deverá criar uma conta na plataforma [MailTrap](https://mailtrap.io), que simula envios de email.
+
 ## Variáveis de Ambiente
 
 Para rodar esse projeto, você vai precisar adicionar as seguintes variáveis de ambiente no seu .env
 
 `JWTKEY`
 
-`MAILTRAPUSER` `MAILTRAPUSER`
+`MAILTRAPUSER` `MAILTRAPPASSWORD`
 
 `MYSQLUSER` `MYSQLPASSWORD` `MYSQLDATABASE`
 
