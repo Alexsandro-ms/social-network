@@ -66,11 +66,11 @@ Para rodar esse projeto, você vai precisar adicionar as seguintes variáveis de
 
 ## Api
 
-#### **Endpoints**
-
 #### **observação.: em todos os endpoints será necessário enviar um header de Authorization com um token válido, exceto nos endpoints de login e cadastro de usuário.**
 
 #### **O token será gerado à partir do login de usuário**
+
+#### **Endpoints**
 
 <details>
  <summary>Usuários</summary>
