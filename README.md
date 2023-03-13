@@ -11,18 +11,25 @@ API 'Social Network' permite que desenvolvedores integrem recursos de uma rede s
 
 ## Funcionalidades
 
-- Cadastro de usuários;
-- Login de usuário;
-- Deletar conta de usuário;
-- Exibição de um usuário;
-- Envio de e-mail para recuperação;
-- Alterar senha;
-- Seguir usuário;
-- Deixar de seguir usuário;
-- Criar post;
-- Listar todos os posts de um usuário;
-- Listar informações de um único post;
-- Deletar post.
+- Usuários:
+  - Login de usuário.
+  - Criação de usuário.
+  - Busca de usuário por nome.
+  - Busca de usuário por Id.
+  - Upload de imagem de perfil de usuário.
+  - Email de recuperação de senha.
+  - Alterar senha.
+  - Deletar usuário.
+  - Seguir usuário.
+  - Deixar de seguir usuário.
+- Postagens:
+  - For you.
+  - Criar postagem.
+  - Listagem de postagens de um usuário.
+  - Detalhes de uma postagem.
+  - Deletar uma postagem.
+  - Curtir postagem.
+  - Deixar de curtir postagem.
 
 ## Clonando repositório
 
@@ -236,6 +243,7 @@ Se a senha for alterada, a resposta será um status code 200 e um JSON com a seg
   "message": "Password updated successfully"
 }
 ```
+
 </details>
 
 <details>
