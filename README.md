@@ -7,7 +7,9 @@ API 'Social Network' permite que desenvolvedores integrem recursos de uma rede s
 ## Stack utilizada
 
 **Back-end:** Node, Express, Sequelize, Dotenv, Bcrypt, cors, JsonWebToken, Nodemailer e multer.
+
 **Database:** Mysql.
+
 **Outros:** MailTrap.
 
 ## Funcionalidades
