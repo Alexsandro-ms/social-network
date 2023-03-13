@@ -20,7 +20,7 @@ const deleteUser = (req, res) => {
       });
     })
     .then(() => {
-      res.send("Successfully deleted user!");
+      res.status(200).json({ message: "Successfully deleted user!" });
     })
     .catch((err) => {
       res.status(500).send(err);

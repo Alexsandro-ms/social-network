@@ -10,7 +10,9 @@ const getUserById = async (req, res) => {
 
     /* Obtendo o usuário pelo id. */
     const id = req.params.id;
-    const user = await UserModel.findByPk(id);
+    const user = await UserModel.findByPk(id, {
+      attributes: ["createdAt", "imagePath", "lastName", "name"]
+    });
 
     /* Se o usuário não for encontrado, retornará um código de status 404 e uma mensagem para o usuário. */
     if (!user) {

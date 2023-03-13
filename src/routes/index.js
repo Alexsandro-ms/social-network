@@ -31,7 +31,7 @@ const AuthMiddleware = require("../middlewares/AuthMiddleware");
 /* Controllers */
 
 /* Likes */
-const LikeThis = require("../controllers/Likes/LikeThis");
+const likeThis = require("../controllers/Likes/LikeThis");
 
 /* Comments */
 const createComment = require("../controllers/Comments/CreateComment");
@@ -62,7 +62,7 @@ router.post("/api/user", upload, createUser);
 router.post("/api/user/signIn", signInUser);
 router.get("/api/user/search/:name", searchUser);
 router.get("/api/user/:id", getUserById);
-router.delete("/api/user", AuthMiddleware, deleteUser);
+router.delete("/api/user/:id", AuthMiddleware, deleteUser);
 router.post("/api/user/forgout-password", sendingEmailForgotPassword);
 router.patch("/api/user/forgout-password/:token", changePasswordUser);
 
@@ -75,12 +75,12 @@ router.get("/api/posts/:id", AuthMiddleware, getAllPostByUserId);
 router.get("/api/posts/:page/:limit", AuthMiddleware, getAllPost);
 router.post("/api/post", AuthMiddleware, upload, createPost);
 router.get("/api/post/:postId", AuthMiddleware, getPostDetails);
-router.delete("/api/post", AuthMiddleware, deletePost);
+router.delete("/api/post/:postId", AuthMiddleware, deletePost);
 
 /* Rotas de Comentarios */
 router.post("/api/comment", AuthMiddleware, createComment);
 
 /* Rotas de Likes */
-router.post("/api/like", AuthMiddleware, LikeThis);
+router.post("/api/like", AuthMiddleware, likeThis);
 
 module.exports = router;

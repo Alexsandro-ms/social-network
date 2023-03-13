@@ -2,7 +2,7 @@ const PostModel = require("../../models/PostModel");
 const UserModel = require("../../models/UserModel");
 const LikeModel = require("../../models/LikesModel");
 
-const LikeThis = async (req, res) => {
+const likeThis = async (req, res) => {
   try {
     const { postId } = req.body;
     const { id: userId } = req.loggedUserInfo;
@@ -35,4 +35,4 @@ const LikeThis = async (req, res) => {
   }
 };
 
-module.exports = LikeThis;
+module.exports = likeThis;
