@@ -57,13 +57,13 @@ Para rodar esse projeto, você vai precisar adicionar as seguintes variáveis de
 
 #### **Endpoints**
 
-<details>
-
- <summary>Usuários</summary>
-
 #### **observação.: em todos os endpoints será necessário enviar um header de Authorization com um token válido, exceto nos endpoints de login e cadastro de usuário.**
 
 #### **O token será gerado à partir do login de usuário**
+
+<details>
+
+ <summary>Usuários</summary>
 
 #### **Login de usuário**
 
@@ -76,7 +76,7 @@ Os seguintes parâmetros devem ser passados no corpo da requisição:
 | Parâmetros | Corpo          | Tipo        |
 | ---------- | -------------- | ----------- |
 | email      | user@email.com | obrigatório |
-| password   | ******\******* | obrigatório |
+| password   | **string**     | obrigatório |
 
 Se o login for bem sucedido, a resposta será um status code 200 e um JSON com a seguinte estrutura:
 
@@ -105,7 +105,7 @@ Os seguintes parâmetros devem ser passados no corpo da requisição:
 | name       | user name      | obrigatório |
 | lastName   | user lastname  | obrigatório |
 | email      | user@email.com | obrigatório |
-| password   | ****\*\*\***** | obrigatório |
+| password   | **string**     | obrigatório |
 | image      | file           | opcional    |
 
 Se o login for bem sucedido, a resposta será um status code 201 e um JSON com a seguinte estrutura:
@@ -159,7 +159,7 @@ Os seguintes parâmetros devem ser passados no parâmetro da requisição:
 
 | Parâmetros | Parâmetro  | Tipo        |
 | ---------- | ---------- | ----------- |
-| id         | **string** | obrigatório |
+| id         | **number** | obrigatório |
 
 Se houver um usuário cadastrado com id enviado, via parâmetro, a resposta será um status code 200 e um JSON com a seguinte estrutura:
 
@@ -259,7 +259,7 @@ Se um usuário seguir outro, a resposta será um status code 200 e um JSON com a
 
 ```json
 {
-	"message": message: "Successfully followed user."
+  "message": "Successfully followed user."
 }
 ```
 
@@ -279,7 +279,7 @@ Se um usuário deixar de seguir outro, a resposta será um status code 200 e um 
 
 ```json
 {
-	"message": message: "Successfully unfollowed."
+  "message": "Successfully unfollowed."
 }
 ```
 
@@ -362,9 +362,9 @@ A resposta será um status code 200 e um JSON com a seguinte estrutura:
   `GET /api/posts/:id`
 ```
 
-Os seguintes parâmetros devem ser passados no corpo da requisição:
+Os seguintes parâmetros devem ser passados no parâmetro da requisição:
 
-| Parâmetros | corpo      | Tipo        |
+| Parâmetros | parâmetro  | Tipo        |
 | ---------- | ---------- | ----------- |
 | id         | **number** | obrigatório |
 
@@ -391,9 +391,9 @@ A resposta será um status code 200 e um JSON com a seguinte estrutura:
 
 Os seguintes parâmetros devem ser passados no parâmetro da requisição:
 
-| Parâmetros | corpo | Tipo        |
-| ---------- | ----- | ----------- |
-| id         | 1     | obrigatório |
+| Parâmetros | parâmetro  | Tipo        |
+| ---------- | ---------- | ----------- |
+| id         | **number** | obrigatório |
 
 A resposta será um status code 200 e um JSON com a seguinte estrutura:
 
@@ -432,7 +432,7 @@ A resposta será um status code 200 e um JSON com a seguinte estrutura:
 
 Os seguintes parâmetros devem ser passados no parâmetro da requisição:
 
-| Parâmetros | corpo      | Tipo        |
+| Parâmetros | parâmetro  | Tipo        |
 | ---------- | ---------- | ----------- |
 | postId     | **number** | obrigatório |
 
